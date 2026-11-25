@@ -1,0 +1,22 @@
+name: Webserver Config Check
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  validate-config:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: List Files
+        run: ls -la config/ scripts/
+
+      - name: Make Script Executable
+        run: chmod +x scripts/check-config.sh
+
+      - name: Run Verification Script
+        run: ./scripts/check-config.sh
